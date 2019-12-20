@@ -6,3 +6,11 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Boogaloo';
+    src: url('Boogaloo-Regular.woff2') format('woff2'),
+    url('Boogaloo-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

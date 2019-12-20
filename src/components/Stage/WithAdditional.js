@@ -2,6 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import {TextWithBorders} from "../TextWithBorders";
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Title = styled.div`
   position: relative;
   top: -1rem;
@@ -15,6 +22,7 @@ const Paragraph = styled.p`
     font-family: 'Boogaloo', cursive;
     font-size: 2rem;
     text-align: center;
+    max-width: 60%;
 
 `;
 
@@ -41,7 +49,7 @@ export function WithAdditional({children, data}) {
     const isTitleImage = title && title.includes('.png');
 
     return (
-        <>
+        <Wrapper>
             {title && <Title>
                 {isTitleImage ? <Image><img src={title} alt=""/></Image>:
                     <TextWithBorders strokeWidth={'0.2em'} strokeColor={"#2c1e0c"} color={"#d5883f"} size={3} text={title}/>}
@@ -64,6 +72,6 @@ export function WithAdditional({children, data}) {
                     </>
                 )
             })}
-        </>
+        </Wrapper>
     )
 }

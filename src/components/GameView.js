@@ -209,7 +209,7 @@ export function GameView({handlerFullscreen}) {
 
                     <Wrapper>
                         <DeskWrapper className="desk-wrapper">
-                            <TopPanel data={tutorialData[tutorialCount]}/>
+                            <TopPanel show={showStage} data={tutorialData[tutorialCount]}/>
                             <Bg bgNone={true} zIndex={3} position={'relative'} tutorial={/*showTutorial || */modal}>
                                 <WrapperImg show={start && !kviz.show}>
                                     <img src={notebook} alt="notebook"/>

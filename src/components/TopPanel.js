@@ -9,13 +9,13 @@ import useStoreon from "storeon/react";
 const Wrapper = styled.div`
   position: absolute;
   right: 4rem;
-  top: -21rem;
+  top: 5rem;
   display: flex;
   align-items: center;
-  z-index: 0;
+  z-index: 99999;
   transition: filter 1s;
-    //pointer-events: none;
-  ${props => props.hide ? 'filter: blur(10px)' : ''}; //brightness(0.70) saturate(130%);
+  opacity: ${props => props.show ? 1 : 0};
+  ${props => props.blur ? 'filter: blur(10px)' : ''}; //brightness(0.70) saturate(130%);
   & > div {
     transition: all 0.2s ease;
     &:hover {
@@ -54,7 +54,7 @@ const HiddenWrapp = ({children, hide, round}) => {
     )
 };
 
-export function TopPanel({data}) {
+export function TopPanel({data, show}) {
     const {dispatch, modal} = useStoreon(
         'modal',
     );
@@ -68,7 +68,7 @@ export function TopPanel({data}) {
     }, [data]);
 
     return (
-        <Wrapper hide={modal}>
+        <Wrapper show={show} blur={modal}>
             <HiddenWrapp round={data.elem === 'music'} hide={!showElems.includes('music')}>
                 <Sound/>
             </HiddenWrapp>
