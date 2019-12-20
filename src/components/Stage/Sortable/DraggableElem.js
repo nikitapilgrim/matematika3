@@ -7,7 +7,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 2;
+    z-index: 5;
     width: 4rem;
     height: 4rem;
     color: #fff;
@@ -18,10 +18,11 @@ const Wrapper = styled.div`
     text-align: center;
     cursor: pointer;
     border-radius: 0.5rem;    
+    
 `;
 
 
-export const  DraggableElem = ({ item, index }) => {
+export const DraggableElem = ({ item, index }) => {
     return (
         <Draggable draggableId={item.id + ''} index={index}>
             {provided => (

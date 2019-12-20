@@ -93,4 +93,4 @@ const stage = store => {
 };
 
 
-export const store = createStore([stage/*, persistState(['stage'])*/]);
+export const store = createStore([stage, persistState(['stage'])]);

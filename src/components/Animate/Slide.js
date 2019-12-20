@@ -14,7 +14,7 @@ const SlideBottom = keyframes`
     transform: translateY(0vh);
   }
   100% {
-    transform: translateY(+100vh);
+    transform: translateY(-100vh);
   }
 `;
 

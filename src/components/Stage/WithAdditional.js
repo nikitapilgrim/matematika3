@@ -19,7 +19,10 @@ const Paragraph = styled.p`
 `;
 
 const Stages = styled.div`
+  position: relative;
   //margin-top: 1rem;
+  /*height: 100%;
+  width: 100%;*/
 `;
 
 const Image = styled.div`
@@ -39,10 +42,10 @@ export function WithAdditional({children, data}) {
 
     return (
         <>
-            <Title>
+            {title && <Title>
                 {isTitleImage ? <Image><img src={title} alt=""/></Image>:
                     <TextWithBorders strokeWidth={'0.2em'} strokeColor={"#2c1e0c"} color={"#d5883f"} size={3} text={title}/>}
-            </Title>
+            </Title>}
             {img && <Image size={img.width}><img src={img.src} alt=""/></Image>}
             {text && <Paragraph>{text.split('\n').map((item, i) => {
                 return (
@@ -53,9 +56,12 @@ export function WithAdditional({children, data}) {
             })}</Paragraph>}
             {React.Children.map(children, child => {
                 return (
-                    <Stages>
-                        {isReactElement(child) && React.cloneElement(child, {layout})}
-                    </Stages>
+                    <>
+                        {isReactElement(child) && <>
+                            {React.cloneElement(child, {layout})}
+                        </>}
+
+                    </>
                 )
             })}
         </>

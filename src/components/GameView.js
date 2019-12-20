@@ -29,12 +29,11 @@ const Wrapper = styled.div`
     position: relative;
     z-index: 1;
     pointer-events: auto;
-    transform: translateY(-100vh);
-    ${props => props.show !== false && SlideVert}
 `;
 
 const DeskWrapper = styled.div`
   width: 100%;
+  height: 100%;
   position: relative;
   pointer-events: auto;
   img {
@@ -59,13 +58,13 @@ const Bg = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    z-index: -1;
+    position: ${props => props.position || 'fixed'};
+    z-index: ${props => props.zIndex || '-1' };
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    background: url(${bg});
+    ${props => !props.bgNone && `background: url(${bg});`};
     background-size: cover;
     background-position: 50% 50%;
     transition: filter 1s;
@@ -85,7 +84,7 @@ const Blur = styled.div`
     height: 100%;
     width: 100%;
     transition: filter 1s;
-    ${props => !props.bgNone && `background: url(${bg});`}
+    ${props => !props.bgNone && `background: url(${bg});`};
     background-size: cover;
     background-position: 50% 50%;
 `;
@@ -96,12 +95,14 @@ const Inner = styled.div`
     justify-content: center;
     align-items: center;
     position: absolute;
+    z-index: 99;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     pointer-events: auto;
     transition: opacity 0.2s linear;
-    transition-delay: ${props => props.show ? '1s' : '0'};
+    transition-delay: ${props => props.show ? '0.1s' : '0.1s'};
     opacity: ${props => props.show ? 1 : 0}
 `;
 
@@ -112,6 +113,12 @@ const CurrentStage = styled.div`
   font-size: 40px;
   color: red;
   opacity: 0.8;
+`;
+
+const WrapperImg = styled.div`
+    position: relative;
+    transform: translateY(-100vh);
+    ${props => props.show !== null && SlideVert};
 `;
 
 const initialState = {count: 0};
@@ -140,6 +147,15 @@ export function GameView({handlerFullscreen}) {
     const [stageData, setStageData] = useState(stagesData[stage]);
     const [tutorialCount, setTutorialCount] = useState(0);
     const [showTutorial, setShowTutorial] = useState(false);
+    const [showStage, setShowStage] = useState(null);
+
+    useEffect(() => {
+        if (start && !kviz.show) {
+            setTimeout(() => {
+                setShowStage(true)
+            }, 200);
+        }
+    }, [kviz.show, start]);
 
     useEffect(() => {
         if (start) {
@@ -191,19 +207,25 @@ export function GameView({handlerFullscreen}) {
                               data={tutorialData[tutorialCount]}/>*/}
                     <CurrentStage>{stageData.id && stageData.id}</CurrentStage>
 
-                    <Wrapper show={start && !kviz.show}>
+                    <Wrapper>
                         <DeskWrapper className="desk-wrapper">
                             <TopPanel data={tutorialData[tutorialCount]}/>
-                            <Bg tutorial={/*showTutorial || */modal}>
-                                <img src={notebook} alt="notebook"/>
-                                <Inner show={true}>
-                                    <Stage onNext={e => e} data={stageData}/>
-                                </Inner>
+                            <Bg bgNone={true} zIndex={3} position={'relative'} tutorial={/*showTutorial || */modal}>
+                                <WrapperImg show={start && !kviz.show}>
+                                    <img src={notebook} alt="notebook"/>
+                                </WrapperImg>
                             </Bg>
+                            <Inner show={showStage}>
+                                <Stage onNext={e => e} data={stageData}/>
+                            </Inner>
 
                         </DeskWrapper>
+
                     </Wrapper>
+
+
                 </Blur>
+
 
 
             </WrapperApp>

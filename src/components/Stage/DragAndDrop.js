@@ -11,12 +11,18 @@ import useStoreon from "storeon/react";
 const DroppedContainer = styled.div`
   display: flex;
   position: relative;
+  overflow: hidden;
   & > div {
     &:not(:first-child) {
       margin-left: 0.4rem;
     }
   }
 `;
+
+const DroppableContainer = styled.div`
+  position: relative;
+  margin-top: 2rem;
+`
 
 const DroppedPlaceholder = styled.div`
     position: relative;
@@ -57,10 +63,11 @@ const PlaceholderInner = styled.div`
 
 const ItemsContainer = styled.div`
   display: flex;
-  margin-top: 0.5rem;
+  position: relative;
+  //margin-top: 0.5rem;
   & > div {
       &:not(:first-child) {
-          margin-left: 0.4rem;
+         // margin-left: 0.4rem;
         }
   }
 `;
@@ -114,6 +121,7 @@ export const DragAndDrop = React.memo(({data, handler}) => {
     const {dispatch, help} = useStoreon('help');
 
     useEffect(() => {
+        console.log(resultItems)
         if (resultItems && resultItems.hasOwnProperty('result') && parsedAnswer === resultItems['result'].placeholder) {
             handler({right: true, value: resultItems['result'].placeholder})
         } else {
@@ -141,7 +149,7 @@ export const DragAndDrop = React.memo(({data, handler}) => {
         }
         // from items to result
         if (result.source.droppableId === 'items' && result.destination.droppableId !== 'items') {
-            const deletedElem = resultItems.hasOwnProperty('result') && resultItems.result;
+            const deletedElem = resultItems.hasOwnProperty(result.destination.droppableId) && resultItems.result.destination.droppableId;
             const newItems = [...items.filter(item => items[result.source.index] !== item)];
             setResultItems({
                 ...resultItems, [result.destination.droppableId]: items[result.source.index]
@@ -181,14 +189,15 @@ export const DragAndDrop = React.memo(({data, handler}) => {
                             <Droppable key={i} droppableId={'result'+i}>
                                 {provided => (
                                     <DroppedPlaceholder ref={provided.innerRef} {...provided.droppableProps}>
+                                        {provided.placeholder}
                                         {help && <HiddenWrapper help={help}>
                                             <DraggableElem item={{id: 'help'+i, value: parsedAnswer}} index={i}
                                                            key={'help'+i}/>
                                         </HiddenWrapper>}
                                         <PlaceholderInner>?</PlaceholderInner>
-                                        {resultItems['result'] &&
-                                        <DraggableElem item={resultItems['result']} index={i}
-                                                       key={resultItems['result'].id}/>
+                                        {resultItems['result' + i] &&
+                                        <DraggableElem item={resultItems['result' + i]} index={i}
+                                                       key={resultItems['result' + i].id}/>
                                         }
                                     </DroppedPlaceholder>
                                 )
@@ -198,7 +207,7 @@ export const DragAndDrop = React.memo(({data, handler}) => {
                     })}
                 </Question>
             </DroppedContainer>
-            <div>
+            <DroppableContainer>
                 <Droppable direction="horizontal" droppableId="items">
                     {provided => (
                         <ItemsContainer ref={provided.innerRef} {...provided.droppableProps}>
@@ -207,7 +216,7 @@ export const DragAndDrop = React.memo(({data, handler}) => {
                         </ItemsContainer>
                     )}
                 </Droppable>
-            </div>
+            </DroppableContainer>
         </DragDropContext>
     )
 });
