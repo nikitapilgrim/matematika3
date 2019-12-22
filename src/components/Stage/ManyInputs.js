@@ -50,7 +50,7 @@ export const ManyInputs = ({data, handler}) => {
             return false
         });
         if (right && Object.values(inputs).length === answers.length) {
-            dispatch('stage/next')
+            handler(true)
         }
     }, [inputs]);
 

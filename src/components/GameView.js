@@ -8,6 +8,7 @@ import {SlideVert} from "./Animate/Slide";
 import notebook from '../assets/image/papersheet@3x.png'
 import styled from "styled-components";
 import {Intro} from './Intro'
+import {Medal} from "./Medal";
 import stagesData, {LAYOUTS} from "../data/stages";
 import {TopPanel} from "./TopPanel";
 import {Tutorial} from "./Tutorial";
@@ -142,7 +143,7 @@ export function GameView({handlerFullscreen}) {
         'kviz',
         'modal',
         'preloader',
-        'final'
+        'final',
     );
     const [stageData, setStageData] = useState(stagesData[stage]);
     const [tutorialCount, setTutorialCount] = useState(0);
@@ -196,6 +197,22 @@ export function GameView({handlerFullscreen}) {
         }
     };
 
+
+    /*
+
+        const memoizedCallback = useCallback(
+            () => {
+                doSomething(a, b);
+            },
+            [a, b],
+        );*/
+    const handlerNext = (right) => {
+        console.log(right)
+        if (right) {
+            dispatch('medal/set', {type: 'gold', id: stage})
+        }
+    };
+
     return (
         <>
             <WrapperApp>
@@ -213,11 +230,13 @@ export function GameView({handlerFullscreen}) {
                             <Bg bgNone={true} zIndex={3} position={'relative'} tutorial={/*showTutorial || */modal}>
                                 <WrapperImg show={start && !kviz.show}>
                                     <img src={notebook} alt="notebook"/>
+                                    <Medal/>
                                 </WrapperImg>
                             </Bg>
                             <Inner show={showStage}>
-                                <Stage onNext={e => e} data={stageData}/>
+                                <Stage onNext={handlerNext} data={stageData}/>
                             </Inner>
+
 
                         </DeskWrapper>
 

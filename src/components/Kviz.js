@@ -43,8 +43,8 @@ const Wrapper = styled.div`
 
 export const Kviz = ({order}) => {
     const [show, setShow] = useState(null);
-    const [number, setNumber] = useState(order);
-    const {dispatch, stage, start, kviz, modal, preloader, final} = useStoreon(
+    const [number, setNumber] = useState(1);
+    const {dispatch, start, kviz, final} = useStoreon(
         'stage',
         'start',
         'kviz',
@@ -68,8 +68,8 @@ export const Kviz = ({order}) => {
     }, [kviz.show, start]);
 
     useEffect(() => {
-        setNumber(order)
-    }, [order]);
+        setNumber(kviz.order)
+    }, [kviz.order]);
 
     return (
         <Wrapper show={show}>
@@ -78,7 +78,7 @@ export const Kviz = ({order}) => {
                 strokeWidth={'0.1em'}
                 size={6}
                 color="#662c0c"
-                text={`Kviz ${order || 1}`}/>
+                text={`Kviz ${number || 1}`}/>
         </Wrapper>
     )
 };

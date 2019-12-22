@@ -45,7 +45,7 @@ const NextButton = styled.button`
     }
 `;
 
-export const Stage = ({data}) => {
+export const Stage = ({data, onNext}) => {
     const {dispatch, modal, kviz, preloader} = useStoreon('modal', 'kviz', 'preloader');
 
 
@@ -53,7 +53,7 @@ export const Stage = ({data}) => {
         <WithAdditional data={data}>
             {data.layout === LAYOUTS.simple &&
             <Simple solo={true} question={data.question} answer={data.answer}/>}
-            {data.layout === LAYOUTS.manyInputs && <ManyInputs handler={e => e} data={data}/>}
+            {data.layout === LAYOUTS.manyInputs && <ManyInputs handler={onNext} data={data}/>}
             {data.layout === LAYOUTS.table && <Table handler={e => e} data={data}/>}
             {data.layout === LAYOUTS.graph && <Graph handler={e => e} data={data}/>}
             {data.layout === LAYOUTS.editCorrect && <EditCorrect handler={e => e} data={data}/>}

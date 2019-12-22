@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useMemo} from 'react';
 import useMount from "react-use/lib/useMount";
 import styled from "styled-components";
 import useStoreon from 'storeon/react';
@@ -7,8 +7,13 @@ import {LAYOUTS} from "../../data/stages";
 import {TextWithBorders} from "../TextWithBorders";
 import useClickAway from "react-use/lib/useClickAway";
 import {sounds} from "../../sounds";
+import range from "ramda/es/range";
+import MedalOne from '../../assets/svg/medal_1.svg';
+import MedalTwo from '../../assets/svg/medal_2.svg';
+import MedalThree from '../../assets/svg/medal_3.svg';
 
 const Buttons = styled.div`
+    position: relative;
     margin-top: 1rem;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -17,6 +22,16 @@ const Buttons = styled.div`
     filter: drop-shadow(0px 0px 0.2rem #896549);  
 
 `;
+
+const Medal = styled.div`
+  position: absolute;
+  right: -1rem;
+  bottom: -1.5rem;
+  svg {
+    width: 4rem;
+    height: 3.5rem;
+  }
+`
 
 const Wrapper = styled.div`
   position: relative;
@@ -63,7 +78,7 @@ const Inner = styled.div`
 `;
 
 export const InnerMenu = (props) => {
-    const {dispatch, modal, kviz, stage} = useStoreon('stage', 'kviz', 'modal');
+    const {dispatch, modal, kviz, stage, medals} = useStoreon('stage', 'kviz', 'modal', 'medals');
     const [buttons, setButtons] = useState(null);
     const ref = useRef(null);
 
@@ -78,13 +93,39 @@ export const InnerMenu = (props) => {
         setButtons(prepareButtons)
     });
 
+    const setMedals = (medals, buttons) => {
+        if (buttons) {
+            const withRange = buttons.reduce((acc, button, i, array) => {
+                if (array[i + 1]) {
+                    const item = {...button, range: range(button.id + 1, array[i + 1].id)};
+                    const gold = item.range.every((level) => {
+                        if (medals.hasOwnProperty(level)) {
+                            return true;
+                        }
+                    });
+                    if (gold) {
+                        return [...acc, {...item, type: 'gold'}]
+                    }
+                    return [...acc, item]
+                }
+                return [...acc]
+            }, []);
+            return withRange;
+        }
+    };
+
+   const buttonsWithMedals = useMemo(() => setMedals(medals, buttons), [medals, buttons]);
+
     useEffect(() => {
         if (stagesData[stage]) {
             if (stagesData[stage].layout === LAYOUTS.quiz) {
-                //dispatch('kviz/set',kviz.order + 1);
+                const nextKviz = buttonsWithMedals.findIndex((item) => {
+                    return item.range.includes(stage + 1)
+                });
+                dispatch('kviz/set',nextKviz + 1);
             }
         }
-    }, [stage]);
+    }, [stage, buttonsWithMedals]);
 
     const handlerStage = (next, number) => () => {
         sounds.mouseclick.play();
@@ -103,12 +144,17 @@ export const InnerMenu = (props) => {
                 </Title>
                 <Buttons>
                     {
-                        buttons && buttons.map((button, i) => {
+                        buttonsWithMedals && buttonsWithMedals.map((button, i) => {
                             const index = i;
                             return (
                                 <Button current={kviz.order === index + 1} onClick={handlerStage(button.id, index + 1)}
                                         key={button.id}>
                                     {index + 1}
+                                    <Medal>
+                                        {button.type === 'bronze' && <MedalOne/>}
+                                        {button.type === 'iron' && <MedalTwo/>}
+                                        {button.type === 'gold' && <MedalThree/>}
+                                    </Medal>
                                 </Button>
                             )
                         })

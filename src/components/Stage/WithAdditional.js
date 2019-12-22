@@ -26,7 +26,7 @@ const Paragraph = styled.p`
 
 `;
 
-const Stages = styled.div`
+const MedalContainer = styled.div`
   position: relative;
   //margin-top: 1rem;
   /*height: 100%;

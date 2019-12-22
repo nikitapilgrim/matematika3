@@ -77,6 +77,7 @@ export default [
             },
         ],
     },
+    {layout: LAYOUTS.quiz},
     {
         id: 4,
         layout: LAYOUTS.simple,
