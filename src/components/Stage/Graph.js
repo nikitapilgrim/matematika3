@@ -14,7 +14,7 @@ will-change: transform;
 
 const Ul = styled.ul`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
   list-style: none;
@@ -33,6 +33,15 @@ const Ul = styled.ul`
         }
     }
   }
+  li {
+      .level_2 {
+        &:first-child {
+              position: relative;
+              right: -5rem;
+            }
+        }
+      }
+  
   
   /*&.level_1 {
     & > li {
