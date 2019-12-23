@@ -9,6 +9,7 @@ import notebook from '../assets/image/papersheet@3x.png'
 import styled from "styled-components";
 import {Intro} from './Intro'
 import {Medal} from "./Medal";
+import {Owl} from "./Owl";
 import stagesData, {LAYOUTS} from "../data/stages";
 import {TopPanel} from "./TopPanel";
 import {Tutorial} from "./Tutorial";
@@ -222,31 +223,24 @@ export function GameView({handlerFullscreen}) {
                     <Kviz/>
                     {/*<Tutorial handler={handlerNextTutorial} active={showTutorial && !kviz.show}
                               data={tutorialData[tutorialCount]}/>*/}
+                    <Owl active={showStage} data={stageData.hasOwnProperty('speech') && stageData.speech}/>
                     <CurrentStage>{stageData.id && stageData.id}</CurrentStage>
 
                     <Wrapper>
                         <DeskWrapper className="desk-wrapper">
                             <TopPanel show={showStage} data={tutorialData[tutorialCount]}/>
-                            <Bg bgNone={true} zIndex={3} position={'relative'} tutorial={/*showTutorial || */modal}>
+                            <Bg bgNone={true} zIndex={3} position={'relative'} tutorial={/*showTutorial ||*/ modal}>
                                 <WrapperImg show={start && !kviz.show}>
                                     <img src={notebook} alt="notebook"/>
                                     <Medal/>
                                 </WrapperImg>
-                            </Bg>
                             <Inner show={showStage}>
                                 <Stage onNext={handlerNext} data={stageData}/>
                             </Inner>
-
-
+                            </Bg>
                         </DeskWrapper>
-
                     </Wrapper>
-
-
                 </Blur>
-
-
-
             </WrapperApp>
 
             <button style={{

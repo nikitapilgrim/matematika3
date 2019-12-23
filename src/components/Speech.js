@@ -15,7 +15,7 @@ const Text = styled.p`
 const Wrapper = styled.div`
     background-color:#fff;
     position: absolute;
-    top: -10rem;
+    bottom: 18rem;
     left: 19rem;
     display: flex;
     flex-direction: column;
@@ -72,7 +72,7 @@ const Klik = styled.div`
 `;
 
 
-export const Speech = ({data, show, onClick}) => {
+export const Speech = ({data, show, onClick, onEnd}) => {
     const [delayShow, setDelayShow] = useState(null);
     const [countSpeech, setCountSpeech] = useState(null);
     const [speech, setSpeech] = useState(null);
@@ -102,6 +102,9 @@ export const Speech = ({data, show, onClick}) => {
     useEffect(() => {
         if (data && typeof countSpeech === 'number') {
             setSpeech(data[countSpeech])
+        }
+        if (data.length === countSpeech) {
+            onEnd && onEnd();
         }
     }, [countSpeech, data]);
 

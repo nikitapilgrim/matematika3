@@ -34,6 +34,12 @@ export default [
                 question: '90 - 40 - 50 = {{0}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Ukucaj tačan odgovor u aktivno polje! Ako nešto ne znaš, klikni na „Pomoć“.`,
+            },
+        ]
     },
     {
         id: 2,
@@ -77,7 +83,6 @@ export default [
             },
         ],
     },
-    {layout: LAYOUTS.quiz},
     {
         id: 4,
         layout: LAYOUTS.simple,
@@ -104,6 +109,7 @@ export default [
         question: "{{input}} KM",
         answer: 80,
     },
+    {layout: LAYOUTS.quiz},
     {
         id: 7,
         layout: LAYOUTS.manyInputs,
@@ -122,6 +128,13 @@ export default [
                 question: '29 - 7 = {{22}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Sada radimo sabiranje i oduzimanje brojeva unutar desetica,
+                 sabiranje dvocifrenih brojeva kad je zbir jedinica datih sabiraka manji ili jednak 10.`,
+            },
+        ]
     },
     {
         id: 8,
@@ -193,6 +206,12 @@ export default [
                 question: '17 + 22 = {{39}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Sabrali smo jedinice sa jedinicama, desetice sa deseticama`,
+            },
+        ]
     }, {
         id: 13,
         layout: LAYOUTS.manyInputs,
@@ -264,6 +283,7 @@ export default [
             [63, 36, 99]
         ],
     },
+    {layout: LAYOUTS.quiz},
     {
         id: 16,
         title: require('../assets/image/headline/headline-03.png'),
@@ -278,6 +298,16 @@ export default [
             [11, '9!', '20!'],
             [58, 30, 88]
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Oduzimanje dvocifrenih brojeva kad su jedinice umanjenika veće ili jednake jedinicama umanjitelja i sabiranje dvocifrenih brojeva kad je zbir jedinica datih sabiraka jednak 10 i odgovarajuća oduzimanja.`,
+            },
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Oduzimamo jedinice od jedinica, desetice od desetica.`,
+            },
+        ]
     },
     {
         id: 17,
@@ -411,6 +441,7 @@ export default [
             },
         ],
     },
+    {layout: LAYOUTS.quiz},
     {
         id: 27,
         layout: LAYOUTS.manyInputs,
@@ -423,6 +454,12 @@ export default [
                 question: '90 - {{64}} = 26'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Sabiranje dvocifrenih brojeva kad je zbir jedinica datih sabiraka veći od 10`,
+            },
+        ]
     },
     {
         id: 28,
@@ -520,7 +557,7 @@ Koliko jabuka ima u obje košare zajedno?
         question: "{{input}}",
         answer: '11 i 40',
     },
-
+    {layout: LAYOUTS.quiz},
     {
         id: 36,
         layout: LAYOUTS.manyInputs,
@@ -536,6 +573,12 @@ Koliko jabuka ima u obje košare zajedno?
                 question: '74 - 46 = {{27}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Oduzimanje dvocifrenih brojeva kad su jedinice umanjenika manje od jedinica umanjitelja`,
+            },
+        ]
     },
     {
         id: 37,
@@ -657,6 +700,7 @@ Koliko jabuka ima u obje košare zajedno?
         question: "{{input}}",
         answer: 43,
     },
+    {layout: LAYOUTS.quiz},
     {
         id: 45,
         layout: LAYOUTS.manyInputs,
@@ -672,6 +716,17 @@ Koliko jabuka ima u obje košare zajedno?
                 question: '86- 42 + 36 - 27 = {{53}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Brojni izrazi sa sabiranjem i oduzimanjem više brojeva bez zagrada i sa zagradama`,
+            },
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Grupisanje sabiraka zovemo zakon asocijacije.
+Grupišući sabirke brzo ćemo izračunati ove zbirove. Ovo su brojni izrazi.`,
+            },
+        ]
     },
     {
         id: 46,
@@ -756,6 +811,7 @@ bude jednak 32.
         question: "93-42+19",
         answer: '93-(42+19)'
     },
+    {layout: LAYOUTS.quiz},
     {
         id: 53,
         layout: LAYOUTS.simple,
@@ -764,6 +820,12 @@ bude jednak 32.
 `,
         question: "{{input}}",
         answer: 'x=42',
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Rješavanje jednostavnijih jednačina i tekstualni zadaci`,
+            },
+        ]
     },
     {
         id: 54,
@@ -888,6 +950,7 @@ bude jednak 32.
         question: "{{input}}",
         answer: 70,
     },
+    {layout: LAYOUTS.quiz},
     {
         id: 68,
         layout: LAYOUTS.manyInputs,
@@ -905,6 +968,13 @@ bude jednak 32.
                 question: '{{XI}}'
             }
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Rimski, redni brojevi i stotice prve hiljade
+`,
+            },
+        ]
     },
     {
         id: 69,
@@ -1022,7 +1092,13 @@ bude jednak 32.
                     right: true
                 }
             ]
-        }
+        },
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Ravne i zakrivljene plohe (površine), likovi i linije`,
+            },
+        ]
     },
     {
         id: 79,
@@ -1067,6 +1143,12 @@ bude jednak 32.
         text: `Kako se zovu brojevi koji se množe?`,
         question: "{{input}}",
         answer: 'faktori (činioci)',
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Množenje faktorima (činiocima) 2 i 3 `,
+            },
+        ]
     },
     {
         id: 82,
@@ -1205,6 +1287,12 @@ bude jednak 32.
                 question: '7 * 4= {{20}}'
             }
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Množenje faktorima (činiocima) 2, 3, 4 i 5`,
+            },
+        ]
     },
     {
         id: 91,
@@ -1389,6 +1477,12 @@ bude jednak 32.
                 question: '10 * 6 = {{60}}'
             }
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Množenje faktorima (činiocima) 6, 7 i 8`,
+            },
+        ]
     },
     {
         id: 102,
@@ -1515,6 +1609,12 @@ bude jednak 32.
                 question: '10 * 9 = {{90}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Množenje faktorima (činiocima) 9, 10, 1 i 0`,
+            },
+        ]
     },
     {
         id: 110,
@@ -1656,6 +1756,18 @@ bude jednak 32.
                 question: '16 : 2 = {{8}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Dijeljenje brojevima 2, 3 i 4
+`,
+            },{
+                layout: LAYOUTS.speech,
+                phrase: `Dijeljenje je suprotna računska radnja množenju.
+18:2=9 jer je 9•2=18
+`,
+            },
+        ]
     },
     {
         id: 117,
@@ -1761,6 +1873,12 @@ bude jednak 32.
                 question: '35 : 5 = {{7}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Dijeljenje brojevima 4, 5 i 10`,
+            },
+        ]
     },
     {
         id: 125,
@@ -2066,6 +2184,12 @@ bude jednak 32.
                 question: '54 : 6 = {{9}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Dijeljenje brojevima 6, 7 i 8`,
+            },
+        ]
     },
     {
         id: 142,
@@ -2337,6 +2461,12 @@ bude jednak 32.
                 question: '54 : 9 = {{6}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Dijeljenje brojem 9 i tablica dijeljenja`,
+            },
+        ]
     },
     {
         id: 158,
@@ -2473,6 +2603,12 @@ bude jednak 32.
         text: `9 • x = 63`,
         question: "{{input}}",
         answer: 'x=7',
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Jednačine sa množenjem i dijeljenjem`,
+            },
+        ]
     },
     {
         id: 165,
@@ -2648,6 +2784,13 @@ bude jednak 32.
                 question: '(4 + 8) • 7 = {{84}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Množenje i dijeljenje zbira i razlike. Računske operacije prvog i drugog reda. Upotreba zagrada.
+`,
+            },
+        ]
     },
     {
         id: 183,
@@ -2682,6 +2825,16 @@ bude jednak 32.
                 question: '9 • 2 + 8 • 5 = {{58}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Množenje i dijeljenje su računske radnje drugog reda,
+                 a sabiranje i oduzimanje računske radnje prvaog reda.
+                  Ako imamo više računskih operacija, a nema zagrada,
+                   prvo radimo računske operacije drugog reda (množenje i dijeljenje)
+`
+            },
+        ]
     },
     {
         id: 185,
@@ -2779,6 +2932,13 @@ bude jednak 32.
         text: `Od jednog kilograma riže potrošeno je 54 dag. Koliko je riže ostalo?`,
         question: "{{input}}",
         answer: 'Ostalo je 46 dag',
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Mjerenje i mjere
+`
+            },
+        ]
     },
     {
         id: 191,
@@ -2834,6 +2994,14 @@ Računaj:
             ['23!', 25, 27],
             [28, 21, 26]
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Zadaci za nadarene
+
+`
+            },
+        ]
     },
     {
         id: 197,
