@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect,useLayoutEffect, useState} from "react";
 import styled from "styled-components";
 import {usePlaceholder} from "../../hooks/usePlaceholder";
 import {Simple} from "./Simple";
@@ -215,6 +215,7 @@ const Level = ({onInit, handler, data, level=0, lines=[0, 0]}) => {
 
 export const Graph = React.memo(function Graph({data, handler}) {
     const [inputs, setInputs] = useState(null);
+    const [tree, setTree] = useState(null);
     const handlerInput = (level) => answer => (value) => {
         if (value === answer) {
             setInputs({...inputs, ...{[level]: true}})
@@ -222,6 +223,16 @@ export const Graph = React.memo(function Graph({data, handler}) {
             setInputs({...inputs, ...{[level]: false}})
         }
     };
+
+    useLayoutEffect(() => {
+        if (data.tree) {
+            setTree(null);
+            setTimeout(() => {
+                setTree(data.tree)
+            });
+            setInputs(null)
+        }
+    }, [data]);
 
     const handlerInit = (level) => (answer) => {
         setTimeout(() => {
@@ -231,9 +242,6 @@ export const Graph = React.memo(function Graph({data, handler}) {
         }, 0);
     };
 
-    useEffect(() => {
-        setInputs(null)
-    }, [data]);
 
 
     useEffect(() => {
@@ -251,7 +259,7 @@ export const Graph = React.memo(function Graph({data, handler}) {
 
     return (
         <Wrapper>
-            {data.tree && <Level onInit={handlerInit} handler={handlerInput} data={data.tree}/>}
+            {tree && <Level onInit={handlerInit} handler={handlerInput} data={data.tree}/>}
         </Wrapper>
     )
 });
