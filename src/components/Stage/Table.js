@@ -30,7 +30,7 @@ const Cell = ({data, onRight, onInit, handler}) => {
     )
 };
 
-export function Table({data}) {
+export function Table({data, handler}) {
     const [inputs, setInputs] = useState({});
 
     const handlerInput = (tr, td) => answer => (value) => {
@@ -49,7 +49,10 @@ export function Table({data}) {
 
     useEffect(() =>  {
         if (Object.values(inputs).length > 0) {
-            const right = Object.values(inputs).every((input => input))
+            const right = Object.values(inputs).every((input => input));
+            if (right) {
+                handler(true)
+            }
         }
     }, [inputs]);
 

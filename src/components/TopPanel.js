@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   z-index: 99999;
-  transition: filter 1s;
+  transition: filter, opacity 1s;
   opacity: ${props => props.show ? 1 : 0};
   ${props => props.blur ? 'filter: blur(10px)' : ''}; //brightness(0.70) saturate(130%);
   & > div {

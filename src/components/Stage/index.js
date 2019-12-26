@@ -54,13 +54,13 @@ export const Stage = ({data, onNext}) => {
             {data.layout === LAYOUTS.simple &&
             <Simple solo={true} question={data.question} answer={data.answer}/>}
             {data.layout === LAYOUTS.manyInputs && <ManyInputs handler={onNext} data={data}/>}
-            {data.layout === LAYOUTS.table && <Table handler={e => e} data={data}/>}
-            {data.layout === LAYOUTS.graph && <Graph handler={e => e} data={data}/>}
-            {data.layout === LAYOUTS.editCorrect && <EditCorrect handler={e => e} data={data}/>}
-            {data.layout === LAYOUTS.dragAndDrop && <DragAndDrop data={data} handler={e => e}/>}
-            {data.layout === LAYOUTS.sortable && <Sortable data={data} handler={e => e}/>}
-            {data.layout === LAYOUTS.choice && <Choice data={data} handler={e => e}/>}
-            {data.layout === LAYOUTS.between && <Between data={data} handler={e => e}/>}
+            {data.layout === LAYOUTS.table && <Table handler={onNext} data={data}/>}
+            {data.layout === LAYOUTS.graph && <Graph handler={onNext} data={data}/>}
+            {data.layout === LAYOUTS.editCorrect && <EditCorrect handler={onNext} data={data}/>}
+            {data.layout === LAYOUTS.dragAndDrop && <DragAndDrop data={data} handler={onNext}/>}
+            {data.layout === LAYOUTS.sortable && <Sortable data={data} handler={onNext}/>}
+            {data.layout === LAYOUTS.choice && <Choice data={data} handler={onNext}/>}
+            {data.layout === LAYOUTS.between && <Between data={data} handler={onNext}/>}
             {/*{data.layout !== LAYOUTS.speech && data.layout !== LAYOUTS.choice &&
             <NextButton onClick={e => e}>Dalje</NextButton>}*/}
         </WithAdditional>

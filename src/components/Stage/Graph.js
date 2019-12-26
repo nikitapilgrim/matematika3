@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {usePlaceholder} from "../../hooks/usePlaceholder";
 import {Simple} from "./Simple";
@@ -37,7 +37,7 @@ const Ul = styled.ul`
       .level_2 {
         &:first-child {
               position: relative;
-              right: -5rem;
+              ${props => props.hight && 'right: -5rem'};
             }
         }
       }
@@ -156,25 +156,53 @@ const Elem = styled.div`
 }};
 `;
 
+const depthOf = function(object, level){
+    // Returns an int of the deepest level of an object
+    level = level || 1;
+
+    var key;
+    for(key in object){
+        if (!object.hasOwnProperty(key)) continue;
+
+        if(typeof object[key] == 'object'){
+            level++;
+            level = depthOf(object[key], level);
+        }
+    }
+
+    return level;
+};
 
 const Level = ({onInit, handler, data, level=0, lines=[0, 0]}) => {
     const {placeholder, text} = usePlaceholder(data.elem);
+    const [hightGraph, setHighttGraph] = useState(null);
     const hasChildren = (data) => Boolean(data.children);
     const regexp = /^[0-9]*$/gm;
     const round = !new RegExp(regexp).test(text);
+    const [value, setValue] = useState('');
 
-    useMount(() => {
+    useEffect(() => {
         if (!placeholder) onInit('level_' + level)(text);
-    });
+        if (level === 0) {
+            if (depthOf(data) > 6) {
+                setHighttGraph(true)
+            }
+        }
+        if (!placeholder) {
+            setValue('');
+        }
+    }, [data]);
 
     return (
-        <Ul className={'level_' + level}>
+        <Ul hight={hightGraph} className={'level_' + level}>
             <Elem level={level} lines={lines[1]} disabled={placeholder} round={round}>
                 <Simple handlerInput={handler('level_' + level)(text)}
                         theme={'table'}
                         disabled={placeholder}
                         placeholder={placeholder}
-                        answer={text}/>
+                        answer={text}
+                        value={!placeholder && value}
+                />
             </Elem>
             {hasChildren(data) && <Li>
                 {data.children.map(((elem, i) => {
@@ -185,9 +213,8 @@ const Level = ({onInit, handler, data, level=0, lines=[0, 0]}) => {
     )
 };
 
-export const Graph = React.memo(function Graph({data}) {
-    const [inputs, setInputs] = useState({});
-    console.log(inputs)
+export const Graph = React.memo(function Graph({data, handler}) {
+    const [inputs, setInputs] = useState(null);
     const handlerInput = (level) => answer => (value) => {
         if (value === answer) {
             setInputs({...inputs, ...{[level]: true}})
@@ -197,10 +224,30 @@ export const Graph = React.memo(function Graph({data}) {
     };
 
     const handlerInit = (level) => (answer) => {
-        setInputs(prev => {
-            return {...prev, ...{[level]: false}}
-        })
+        setTimeout(() => {
+            setInputs((prev = {}) => {
+                return {...prev, ...{[level]: false}}
+            });
+        }, 0);
     };
+
+    useEffect(() => {
+        setInputs(null)
+    }, [data]);
+
+
+    useEffect(() => {
+        console.log(inputs)
+        if (inputs) {
+            const right = Object.values(inputs).every((value, i) => {
+                return value === true;
+            });
+            if (right) {
+                handler(true)
+            }
+        }
+    }, [inputs]);
+
 
     return (
         <Wrapper>

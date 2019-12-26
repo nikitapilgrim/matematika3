@@ -263,7 +263,7 @@ const InputWithState = React.memo(({separator, edit, val, solo, question, answer
         <>
             {question.split('\n').map((item, i) => (
                 <React.Fragment key={i}>
-                    <br/>
+                    { direction !== 'row' && <br/>}
                     {reactStringReplace(item, /{{([^}]+)}}/g, (match, i) => {
                         return (
                             <InputWrapper separator={separator && separator.width} width={width} height={height} key={i}>
@@ -303,7 +303,6 @@ export const Simple = React.memo(({separator, edit, value, solo, question, img, 
         size: layout === 'simple' ? 2 : 2,
         color: layout === 'simple' ? '#000' : '#7b4728'
     };
-    console.log(separator)
 
     return (
         <Wrapper>
@@ -315,6 +314,7 @@ export const Simple = React.memo(({separator, edit, value, solo, question, img, 
                 }
 
                 <InputWithState
+                    direction={direction}
                     separator={separator}
                     val={value}
                     edit={edit}

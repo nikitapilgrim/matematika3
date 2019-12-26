@@ -72,12 +72,12 @@ const Button = styled.button`
     font-weight: 900;
 `;
 
-export function Between({data}) {
+export function Between({data, handler}) {
     const {question} = data;
 
     const handlerClick = (answer) => () => {
         if (answer) {
-            console.log('right')
+            handler(true)
         }
     };
 

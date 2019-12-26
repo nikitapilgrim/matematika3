@@ -34,12 +34,6 @@ export default [
                 question: '90 - 40 - 50 = {{0}}'
             },
         ],
-        speech: [
-            {
-                layout: LAYOUTS.speech,
-                phrase: `Ukucaj tačan odgovor u aktivno polje! Ako nešto ne znaš, klikni na „Pomoć“.`,
-            },
-        ]
     },
     {
         id: 2,
@@ -62,6 +56,12 @@ export default [
                 question: '70 - 50 + 60 = {{80}}'
             },
         ],
+        speech: [
+            {
+                layout: LAYOUTS.speech,
+                phrase: `Ukucaj tačan odgovor u aktivno polje! Ako nešto ne znaš, klikni na „Pomoć“.`,
+            },
+        ]
     },
     {
         id: 3,
@@ -1236,7 +1236,6 @@ bude jednak 32.
     {
         id: 88,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `U jednakost upiši nedostajuće brojeve:`,
         questions: [
@@ -1254,7 +1253,6 @@ bude jednak 32.
     {
         id: 89,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `U jednakost upiši nedostajuće brojeve:`,
         questions: [
@@ -1273,7 +1271,6 @@ bude jednak 32.
     {
         id: 90,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `U jednakost upiši nedostajuće brojeve:`,
         questions: [
@@ -1297,7 +1294,6 @@ bude jednak 32.
     {
         id: 91,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `U jednakost upiši nedostajuće brojeve:`,
         questions: [
@@ -1315,7 +1311,6 @@ bude jednak 32.
     {
         id: 92,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `U jednakost upiši nedostajuće brojeve:`,
         questions: [
@@ -1333,7 +1328,6 @@ bude jednak 32.
     {
         id: 93,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `U jednakost upiši nedostajuće brojeve:`,
         questions: [
@@ -1351,7 +1345,6 @@ bude jednak 32.
     {
         id: 94,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `Upiši nedostajući broj u jednakost:`,
         questions: [
@@ -1369,7 +1362,6 @@ bude jednak 32.
     {
         id: 95,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `Upiši nedostajući broj u jednakost:`,
         questions: [
@@ -1387,7 +1379,6 @@ bude jednak 32.
     {
         id: 96,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `Upiši nedostajući broj u jednakost:`,
         questions: [
@@ -1460,7 +1451,6 @@ bude jednak 32.
     {
         id: 101,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `Upiši nedostajući broj u jednakost:`,
         questions: [

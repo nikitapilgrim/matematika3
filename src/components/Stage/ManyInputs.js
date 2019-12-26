@@ -39,13 +39,19 @@ export const ManyInputs = ({data, handler}) => {
     };
 
     useEffect(() => {
+        const nodes = ref.current.querySelectorAll('input');
         const answers = questions.reduce((acc, item) => {
             return [...acc, item.answer]
         }, []);
-        const right = Object.entries(inputs).every((pair) => {
+        const right = Object.entries(inputs).every((pair, i) => {
             const [key, value] = pair;
             if (answers[key]) {
-                if (answers[key] === value) return true
+                if (answers[key] === value) {
+                    if (nodes[i + 1]) {
+                        nodes[i + 1].focus();
+                    }
+                    return true
+                }
             }
             return false
         });

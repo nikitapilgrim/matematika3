@@ -161,7 +161,7 @@ export function GameView({handlerFullscreen}) {
 
     useEffect(() => {
         if (start) {
-            setShowTutorial(true);
+            //setShowTutorial(true);
         }
     }, [start]);
 
@@ -211,25 +211,26 @@ export function GameView({handlerFullscreen}) {
         console.log(right)
         if (right) {
             dispatch('medal/set', {type: 'gold', id: stage})
+            dispatch('stage/next');
         }
     };
 
     return (
         <>
             <WrapperApp>
-                {/*<Blur zIndex={1} tutorial={showTutorial}/>*/}
+                <Blur zIndex={1} tutorial={showTutorial}/>
                 <Blur bgNone={true} zIndex={2} tutorial={modal}>
                     <Intro/>
                     <Kviz/>
-                    {/*<Tutorial handler={handlerNextTutorial} active={showTutorial && !kviz.show}
-                              data={tutorialData[tutorialCount]}/>*/}
-                    <Owl active={showStage} data={stageData.hasOwnProperty('speech') && stageData.speech}/>
+                    <Tutorial handler={handlerNextTutorial} active={showTutorial && !kviz.show}
+                              data={tutorialData[tutorialCount]}/>
+                    <Owl active={showStage && !showTutorial && !kviz.show} data={stageData.hasOwnProperty('speech') && stageData.speech}/>
                     <CurrentStage>{stageData.id && stageData.id}</CurrentStage>
 
                     <Wrapper>
                         <DeskWrapper className="desk-wrapper">
                             <TopPanel show={showStage} data={tutorialData[tutorialCount]}/>
-                            <Bg bgNone={true} zIndex={3} position={'relative'} tutorial={/*showTutorial ||*/ modal}>
+                            <Bg bgNone={true} zIndex={3} position={'relative'} tutorial={showTutorial || modal}>
                                 <WrapperImg show={start && !kviz.show}>
                                     <img src={notebook} alt="notebook"/>
                                     <Medal/>

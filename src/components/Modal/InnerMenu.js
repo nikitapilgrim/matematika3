@@ -117,7 +117,7 @@ export const InnerMenu = (props) => {
    const buttonsWithMedals = useMemo(() => setMedals(medals, buttons), [medals, buttons]);
 
     useEffect(() => {
-        if (stagesData[stage]) {
+        if (stagesData[stage] && buttonsWithMedals) {
             if (stagesData[stage].layout === LAYOUTS.quiz) {
                 const nextKviz = buttonsWithMedals.findIndex((item) => {
                     return item.range.includes(stage + 1)
