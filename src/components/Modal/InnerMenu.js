@@ -11,6 +11,7 @@ import range from "ramda/es/range";
 import MedalOne from '../../assets/svg/medal_1.svg';
 import MedalTwo from '../../assets/svg/medal_2.svg';
 import MedalThree from '../../assets/svg/medal_3.svg';
+import izaberiKviz from '../../assets/image/headline/izaberi_kviz_headline.png';
 
 const Buttons = styled.div`
     position: relative;
@@ -71,10 +72,17 @@ const Button = styled.div`
 `;
 
 const Title = styled.div`
-  filter: drop-shadow(0px 0px 10px white);  
+  //filter: drop-shadow(0px 0px 10px white);  
 `;
 const Inner = styled.div`
 
+`;
+
+const ImgWrapper = styled.div`
+  width: 100%;
+  img {
+   max-width: 100%;
+  }
 `;
 
 export const InnerMenu = (props) => {
@@ -140,7 +148,10 @@ export const InnerMenu = (props) => {
         <Wrapper>
             <Inner ref={ref}>
                 <Title>
-                    <TextWithBorders strokeWidth={"0.15em"} strokeColor={"#896549"} color='#fce4be' text="Izaberi kviz!"/>
+                    <ImgWrapper>
+                        <img src={izaberiKviz} alt=""/>
+                    </ImgWrapper>
+                    {/*<TextWithBorders strokeWidth={"0.15em"} strokeColor={"#896549"} color='#fce4be' text="Izaberi kviz!"/>*/}
                 </Title>
                 <Buttons>
                     {
