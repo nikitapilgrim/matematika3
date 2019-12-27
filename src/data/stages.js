@@ -1161,7 +1161,6 @@ bude jednak 32.
     {
         id: 83,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `Rimskim znakovima napiši mjesece jeseni.`,
         questions: [
@@ -1180,7 +1179,6 @@ bude jednak 32.
     {
         id: 84,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `Rimskim znakovima napiši mjesece jeseni.`,
         questions: [
@@ -1198,7 +1196,6 @@ bude jednak 32.
     {
         id: 85,
         layout: LAYOUTS.manyInputs,
-        direction: 'row',
         title: require('../assets/image/headline/headline-09.png'),
         text: `Rimskim znakovima napiši mjesece jeseni.`,
         questions: [
@@ -2043,7 +2040,7 @@ bude jednak 32.
     {
         id: 135,
         layout: LAYOUTS.dragAndDrop,
-        question: "30:5{{drop(<)}}28:4",
+        question: "30:5{{drop(<)}}28:4{{drop(=)}}",
         items: [
             {
                 placeholder: '<',

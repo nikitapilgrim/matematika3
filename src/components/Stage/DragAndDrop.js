@@ -67,7 +67,7 @@ const ItemsContainer = styled.div`
   //margin-top: 0.5rem;
   & > div {
       &:not(:first-child) {
-         // margin-left: 0.4rem;
+         margin-left: 0.4rem;
         }
   }
 `;
@@ -109,8 +109,11 @@ const HiddenWrapper = styled.div`
 
 
 const parseQuestion = (question) => {
-    const type = question.match(/{{([^}]+)}}/);
-    return type[1].match(/\(([^()]+)\)/)[1]
+    const type = question.match(/{{([^}]+)}}/g);
+    return type.reduce( (acc, item, i) => {
+        return {...acc, [i + 1]: item.match(/\(([^()]+)\)/)[1]}
+    }, {});
+    //return type[1].match(/\(([^()]+)\)/)[1]
 };
 
 export const DragAndDrop = React.memo(({data, handler}) => {
@@ -121,19 +124,24 @@ export const DragAndDrop = React.memo(({data, handler}) => {
     const {dispatch, help} = useStoreon('help');
 
     useEffect(() => {
-        console.log(resultItems)
-        if (resultItems && resultItems.hasOwnProperty('result') && parsedAnswer === resultItems['result'].placeholder) {
-            handler({right: true, value: resultItems['result'].placeholder})
-        } else {
-            handler({right: false, value: parsedAnswer})
-        }
-    }, [resultItems]);
-
-    useEffect(() => {
         setItems(data.items);
         setQuestion(data.question);
         setResultItems({})
     }, [data]);
+
+    useEffect(() => {
+        if (Object.values(resultItems).length === Object.values(parsedAnswer).length) {
+            const right = Object.entries(resultItems).every((pair, i) => {
+                const [key, obj] = pair;
+                const id = i + 1;
+                const value = obj.placeholder;
+                console.log(id, value, parsedAnswer, parsedAnswer[id] === value, parsedAnswer[id])
+                return parsedAnswer[id] === value;
+            });
+            if (right) handler(true)
+        }
+    }, [resultItems]);
+
 
     const onDragEnd = (result) => {
         console.log(result)
@@ -149,7 +157,7 @@ export const DragAndDrop = React.memo(({data, handler}) => {
         }
         // from items to result
         if (result.source.droppableId === 'items' && result.destination.droppableId !== 'items') {
-            const deletedElem = resultItems.hasOwnProperty(result.destination.droppableId) && resultItems.result.destination.droppableId;
+            const deletedElem = resultItems.hasOwnProperty(result.destination.droppableId) && resultItems[result.destination.droppableId];
             const newItems = [...items.filter(item => items[result.source.index] !== item)];
             setResultItems({
                 ...resultItems, [result.destination.droppableId]: items[result.source.index]
